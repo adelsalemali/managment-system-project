@@ -1,0 +1,61 @@
+     
+<a [routerLink]="['/create-task', id]" class="nav-link btn btn-primary mb-3">
+    Add a New Task
+</a>
+
+<div class="row mb-3">
+    <div class="col-md-6">
+        <input type="text" [(ngModel)]="name" placeholder="Search by name">
+        <input type="text" [(ngModel)]="description" placeholder="Search by description">
+        <input type="text" [(ngModel)]="status" placeholder="Search by status">
+<button (click)="performSearch()">Search</button>
+
+    </div>
+  </div>
+  
+
+<table class="table table-hover table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Due Date</th>
+            <th>Status</th>
+            <th colspan="2" class="text-center">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let task of tasks">
+            <td>{{ task.id }}</td>
+            <td>{{ task.name }}</td>
+            <td>{{ task.description }}</td>
+            <td>{{ task.dueDate | date }}</td>
+            <td>
+                <span [ngClass]="{'text-success': task.status === 'Completed', 'text-warning': task.status === 'In Progress', 'text-danger': task.status === 'Pending'}">
+                    {{ task.status }}
+                </span>
+            </td>
+            <td class="text-center">
+                <button (click)="updateTask(task.id)" class="btn btn-outline-info">Update</button>
+            </td>
+            <td class="text-center">
+                <button (click)="deleteTask(task)" class="btn btn-outline-danger">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="pageNumber === 0">
+        <button class="page-link" (click)="previousPage()">Previous</button>
+      </li>
+      <li class="page-item disabled">
+        <span class="page-link">Page {{ pageNumber + 1 }} of {{ totalPages }}</span>
+      </li>
+      <li class="page-item" [class.disabled]="pageNumber >= totalPages - 1">
+        <button class="page-link" (click)="nextPage()">Next</button>
+      </li>
+    </ul>
+  </nav>

@@ -1,0 +1,48 @@
+
+<form (ngSubmit)="onSubmit()">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6"> 
+  
+  
+          <div class="form-group">
+            <input type="hidden" class="form-control" id="name" name="id" [(ngModel)]="user.id">
+          </div>
+
+          <div class="form-group">
+            <label for="name">User Name</label>
+            <input type="text" class="form-control" id="name" name="userName" [(ngModel)]="user.userName">
+          </div>
+  
+          <div class="form-group">
+            <label for="name">First Name</label>
+            <input type="text" class="form-control" id="name" name="name" [(ngModel)]="user.firstName">
+          </div>
+  
+          <div class="form-group">
+            <label for="description">Last Name</label>
+            <input type="text" class="form-control" id="description" name="lastName" [(ngModel)]="user.lastName">
+          </div>
+  
+          <div class="form-group">
+            <label for="role">Role</label>
+            <input type="text" class="form-control" id="role" name="role" [(ngModel)]="user.role">
+          </div>
+  
+          <div class="form-group">
+            <label for="status">Password</label>
+            <input type="text" class="form-control" id="status" name="password" [(ngModel)]="user.password">
+          </div>
+
+          <div class="form-group">
+            <label for="status">Soft Delete</label>
+            <input type="text" class="form-control" id="status" name="deleted" [(ngModel)]="user.deleted">
+          </div>
+  
+          <button class="btn btn-primary" type="submit">Test Submit</button>
+  
+        </div>
+      </div>
+    </div>
+  </form>
+  

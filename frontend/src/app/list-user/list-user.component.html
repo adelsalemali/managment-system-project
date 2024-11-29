@@ -1,0 +1,80 @@
+<div class="container mt-3">
+    <h2>User List</h2>
+  
+    <div class="row mb-3">
+      <div class="col-md-6">
+          <input type="text" [(ngModel)]="userName" placeholder="Search by user Name">
+          <input type="text" [(ngModel)]="firstName" placeholder="Search by firstName">
+          <input type="text" [(ngModel)]="lastName" placeholder="Search by last Name">
+  <button (click)="performSearch()">Search</button>
+  
+      </div>
+    </div> 
+    
+    <!-- User Table -->
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>User Name</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Role</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{ user.id }}</td>
+            <td>{{ user.userName }}</td>
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td> 
+            <td>{{ user.role }}</td>
+            <td>
+              <button
+                class="btn btn-info btn-sm me-1"
+                (click)="updateUser(user.id)"
+              >
+                Update
+              </button>
+              <button
+                class="btn btn-danger btn-sm me-1"
+                (click)="deleteUser(user.id)"
+              >
+                Delete
+              </button>
+              <button
+                class="btn btn-secondary btn-sm"
+                (click)="detailsUsers(user.id)"
+              >
+                Details
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Pagination Controls -->
+    <div class="d-flex justify-content-between align-items-center">
+      <button
+        class="btn btn-secondary"
+        (click)="previousPage()"
+        [disabled]="page === 0"
+      >
+        Previous
+      </button>
+  
+      <span>Page {{ page + 1 }} of {{ totalPages }}</span>
+  
+      <button
+        class="btn btn-secondary"
+        (click)="nextPage()"
+        [disabled]="page >= totalPages - 1"
+      >
+        Next
+      </button>
+    </div>
+  </div>
+  

@@ -1,0 +1,85 @@
+<div class="container mt-3">
+    <h2>Project List</h2>
+
+
+ <a [routerLink]="['/create-project', id]" class="nav-link btn btn-primary mb-3">
+      Add a New project
+  </a>
+
+
+  <div class="row mb-3">
+    <div class="col-md-6">
+        <input type="text" [(ngModel)]="name" placeholder="Search by name">
+        <input type="text" [(ngModel)]="description" placeholder="Search by description">
+        <input type="text" [(ngModel)]="status" placeholder="Search by status">
+<button (click)="performSearch()">Search</button>
+
+    </div>
+  </div>
+  
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th (click)="sortBy = 'id'; loadProjects()">ID</th>
+            <th (click)="sortBy = 'name'; loadProjects()">Name</th>
+            <th>Description</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let proj of project">
+            <td>{{ proj.id }}</td>
+            <td>{{ proj.name }}</td>
+            <td>{{ proj.description }}</td>
+            <td>{{ proj.startDate | date: 'yyyy-MM-dd' }}</td>
+            <td>{{ proj.endDate | date: 'yyyy-MM-dd' }}</td>
+            <td>{{ proj.status }}</td>
+            <td>
+              <button
+                class="btn btn-info btn-sm me-1"
+                (click)="updateProject(proj.id)"
+              >
+                Update
+              </button>
+              <button
+                class="btn btn-danger btn-sm me-1"
+                (click)="deleteProject(proj.id)"
+              >
+                Delete
+              </button>
+              <button
+                class="btn btn-secondary btn-sm"
+                (click)="detailsProject(proj.id)"
+              >
+                Details
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div class="d-flex justify-content-between align-items-center">
+      <button
+        class="btn btn-secondary"
+        (click)="previousPage()"
+        [disabled]="page === 0"
+      >
+        Previous
+      </button>
+  
+      <span>Page {{ page + 1 }} of {{ totalPages }}</span>
+  
+      <button
+        class="btn btn-secondary"
+        (click)="nextPage()"
+        [disabled]="page >= totalPages - 1"
+      >
+        Next
+      </button>
+    </div>
+  </div>

@@ -22,8 +22,8 @@ public class TasksServiceImplement implements TasksService {
 	private final TaskCriteriaRepository taskCriteriaRepository;
 	private final TasksMapper tasksMapper;
 	public TasksServiceImplement(TasksRepository tasksRepository,
-								 ProjectRepository projectRepository,
-								 TaskCriteriaRepository taskCriteriaRepository, TasksMapper tasksMapper) {
+				     ProjectRepository projectRepository,
+				     TaskCriteriaRepository taskCriteriaRepository, TasksMapper tasksMapper) {
 		this.tasksRepository = tasksRepository;
 		this.projectRepository = projectRepository;
 		this.taskCriteriaRepository = taskCriteriaRepository;
@@ -70,7 +70,7 @@ public class TasksServiceImplement implements TasksService {
 	public TaskDto updateTask(TaskDto tasksDto) {
 
 	 	Task task = tasksRepository.findByIdAndProjectId(tasksDto.getId(),
-				                                         tasksDto.getProjectId()).orElseThrow(()
+				                                 tasksDto.getProjectId()).orElseThrow(()
 				-> new EntityNotFoundException(TaskDto.class," " + tasksDto.getId()
 				+ " with associated project " + tasksDto.getProjectId() + " not found"));
 
@@ -92,8 +92,8 @@ public class TasksServiceImplement implements TasksService {
 
 	@Override
 	public Page<TaskDto> searchTasks(PaginationRequest paginationRequest,
-									 TaskSearchCriteria taskSearchCriteria,
-									 Integer projectId) {
+					 TaskSearchCriteria taskSearchCriteria,
+					 Integer projectId) {
 		if (projectId == null) {
 			throw new IllegalArgumentException("User ID must not be null");
 		}

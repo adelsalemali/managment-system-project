@@ -61,8 +61,8 @@ public class TasksRestController {
 
 	@GetMapping("/task/search")
 	public Page<TaskDto> searchInTaskList(PaginationRequest paginationRequest,
-										  TaskSearchCriteria taskSearchCriteria,
-										  Integer projectId) {
+					      TaskSearchCriteria taskSearchCriteria,
+					      Integer projectId) {
 		return tasksService.searchTasks(paginationRequest, taskSearchCriteria, projectId);
 	}
 }

@@ -35,7 +35,7 @@ public class ProjectRestController {
 
 	@GetMapping("/projects/{projectId}/{userId}")
 		public ProjectDto getProjectById(@PathVariable Integer projectId,
-										 @PathVariable Integer userId) {
+			                         @PathVariable Integer userId) {
 		return projectService.findProjectByIdAndUserId(projectId, userId);
 	}
 
@@ -60,7 +60,8 @@ public class ProjectRestController {
 
 	@GetMapping("/projects/search")
 	public Page<ProjectDto> searchInProjectList(PaginationRequest paginationRequest,
-												ProjectSearchCriteria projectSearchCriteria, Integer userId) {
+						    ProjectSearchCriteria projectSearchCriteria, 
+						    Integer userId) {
 
 		return projectService.searchProjects(paginationRequest, projectSearchCriteria, userId);
 	}

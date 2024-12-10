@@ -25,9 +25,9 @@ public class ProjectServiceImplement implements ProjectService {
 	private final ProjectMapper projectMapper;
 
 	public ProjectServiceImplement(ProjectRepository projectRepository,
-                                   UsersRepository usersRepository,
-								   ProjectCriteriaRepository projectCriteriaRepository,
-                                   ProjectMapper projectMapper) {
+                                       UsersRepository usersRepository,
+				       ProjectCriteriaRepository projectCriteriaRepository,
+                                       ProjectMapper projectMapper) {
 		this.projectRepository = projectRepository;
 		this.usersRepository = usersRepository;
 		this.projectCriteriaRepository = projectCriteriaRepository;
@@ -70,7 +70,7 @@ public class ProjectServiceImplement implements ProjectService {
 	public ProjectDto updateProject(ProjectDto projectDto) {
 
 		Project project = projectRepository.findByIdAndUserId(projectDto.getId(),
-				                                              projectDto.getUserId()).orElseThrow(() ->
+				                                      projectDto.getUserId()).orElseThrow(() ->
 				new EntityNotFoundException(ProjectDto.class, projectDto.getId() + " with associated USER "
 				+ projectDto.getUserId() + "  not found "));
 
@@ -94,8 +94,8 @@ public class ProjectServiceImplement implements ProjectService {
 
 	@Override
 	public Page<ProjectDto> searchProjects(PaginationRequest paginationRequest,
-										   ProjectSearchCriteria projectSearchCriteria,
-										   Integer userId) {
+					       ProjectSearchCriteria projectSearchCriteria,
+					       Integer userId) {
 		if (userId == null) {
 			throw new IllegalArgumentException("User ID must not be null");
 		}

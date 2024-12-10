@@ -2,15 +2,7 @@ package management.model;
 
 
 import java.time.LocalDate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,7 +22,8 @@ import org.hibernate.annotations.Where;
 public class Task {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "task_seq")
+	@SequenceGenerator(name = "task_seq", sequenceName = "task_sequence", allocationSize = 1)
 	@Column(name = "task_id")
 	private Integer id;
 	@Column(name = "task_name")
@@ -42,7 +35,6 @@ public class Task {
 	@Column(name = "status")
 	private String status;
 	private boolean deleted = Boolean.FALSE;
-
 	@ManyToOne
 	@JoinColumn(name = "project_id")
 	private Project project;

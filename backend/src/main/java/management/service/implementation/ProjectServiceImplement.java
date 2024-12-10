@@ -4,11 +4,11 @@ package management.service.implementation;
 import management.dto.ProjectDto;
 import management.exception.EntityNotFoundException;
 import management.mapper.ProjectMapper;
-import management.model.MyUser;
+import management.model.Users;
 import management.model.Project;
 import management.criteria.PaginationRequest;
 import management.criteria.ProjectSearchCriteria;
-import management.repository.MyUserRepository;
+import management.repository.UsersRepository;
 import management.repository.criteria.ProjectCriteriaRepository;
 import management.repository.ProjectRepository;
 import management.service.ProjectService;
@@ -20,15 +20,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProjectServiceImplement implements ProjectService {
 	private final ProjectRepository projectRepository;
-	private final MyUserRepository myUserRepository;
+	private final UsersRepository usersRepository;
 	private final ProjectCriteriaRepository projectCriteriaRepository;
 	private final ProjectMapper projectMapper;
 
 	public ProjectServiceImplement(ProjectRepository projectRepository,
-								   MyUserRepository myUserRepository, ProjectCriteriaRepository projectCriteriaRepository,
-								   ProjectMapper projectMapper) {
+                                   UsersRepository usersRepository,
+								   ProjectCriteriaRepository projectCriteriaRepository,
+                                   ProjectMapper projectMapper) {
 		this.projectRepository = projectRepository;
-		this.myUserRepository = myUserRepository;
+		this.usersRepository = usersRepository;
 		this.projectCriteriaRepository = projectCriteriaRepository;
 		this.projectMapper = projectMapper;
 	}
@@ -54,12 +55,13 @@ public class ProjectServiceImplement implements ProjectService {
 	@Override
 	public ProjectDto createProject(ProjectDto projectDto) {
 
-		MyUser myUser = myUserRepository.findById(projectDto.getUserId()).orElseThrow(()
+		Users myUser = usersRepository.findById(projectDto.getUserId()).orElseThrow(()
 				-> new EntityNotFoundException(ProjectDto.class, " " + projectDto.getId()+ "  with associated USER " + projectDto.getUserId() + " not found"));
 
 
 		Project newProject = projectMapper.fromDtoToEntity(projectDto);
 		newProject.setUser(myUser);
+
 		Project saveNewProject = projectRepository.save(newProject);
 		return projectMapper.fromEntityToDto(saveNewProject);
 	}

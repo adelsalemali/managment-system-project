@@ -1,14 +1,14 @@
 CREATE TABLE project (
-    project_id INT PRIMARY KEY AUTO_INCREMENT,
+    project_id SERIAL PRIMARY KEY,
     user_id INT,
     name VARCHAR(50) NOT NULL,
     description VARCHAR(50),
     start_date DATE,
     end_date DATE,
     status VARCHAR(50),
-    deleted TINYINT(1) DEFAULT 0,
+    deleted BOOLEAN DEFAULT FALSE,
 
     FOREIGN KEY (user_id)
-    REFERENCES myUser(user_id)
-    ON DELETE CASCADE
+        REFERENCES users(user_id)
+        ON DELETE CASCADE
 );

@@ -1,12 +1,12 @@
 package projectmanagment.project.service;
-import management.dto.MyUserDto;
-import management.mapper.MyUserMapper;
-import management.model.MyUser;
-import management.criteria.MyUserSearchCriteria;
+import management.dto.UsersDto;
+import management.mapper.UsersMapper;
+import management.model.Users;
+import management.criteria.UsersSearchCriteria;
 import management.criteria.PaginationRequest;
-import management.repository.MyUserRepository;
-import management.repository.criteria.MyUserCriteriaRepository;
-import management.service.implementation.MyUserServiceImplement;
+import management.repository.UsersRepository;
+import management.repository.criteria.UsersCriteriaRepository;
+import management.service.implementation.UsersServiceImplement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -28,14 +28,14 @@ import static org.mockito.Mockito.times;
 public class MyUserServiceTest {
 
     @Mock
-    private MyUserRepository myUserRepository;
+    private UsersRepository myUserRepository;
     @Mock
-    private MyUserMapper myUserMapper;
+    private UsersMapper myUserMapper;
 
     @Mock
-    private MyUserCriteriaRepository myUserCriteriaRepository;
+    private UsersCriteriaRepository myUserCriteriaRepository;
     @InjectMocks
-    private MyUserServiceImplement myUserServiceImplement;
+    private UsersServiceImplement myUserServiceImplement;
 
     @BeforeEach
     public void setup() {
@@ -51,7 +51,7 @@ public class MyUserServiceTest {
         paginationRequest.setSortBy("id");
         paginationRequest.setSortDirection(Sort.Direction.ASC);
 
-        MyUser myUser1 = MyUser.builder()
+        Users myUser1 = Users.builder()
                 .id(1)
                 .firstName("Adel")
                 .lastName("Salem")
@@ -59,7 +59,7 @@ public class MyUserServiceTest {
                 .password("adel")
                 .deleted(false)
                 .build();
-        MyUser myUser2 = MyUser.builder()
+        Users myUser2 = Users.builder()
                 .id(2)
                 .firstName("Ahmed")
                 .lastName("Ali")
@@ -68,7 +68,7 @@ public class MyUserServiceTest {
                 .deleted(false)
                 .build();
 
-        MyUserDto myUserDto1 = MyUserDto.builder()
+        UsersDto myUserDto1 = UsersDto.builder()
                 .id(1)
                 .firstName("Adel")
                 .lastName("Salem")
@@ -76,7 +76,7 @@ public class MyUserServiceTest {
                 .password("adel")
                 .deleted(false)
                 .build();
-        MyUserDto myUserDto2 = MyUserDto.builder()
+        UsersDto myUserDto2 = UsersDto.builder()
                 .id(2)
                 .firstName("Ahmed")
                 .lastName("Ali")
@@ -85,12 +85,12 @@ public class MyUserServiceTest {
                 .deleted(false)
                 .build();
 
-        Page<MyUser> page = new PageImpl<>(List.of(myUser1, myUser2));
+        Page<Users> page = new PageImpl<>(List.of(myUser1, myUser2));
         when(myUserRepository.findAll(any(Pageable.class))).thenReturn(page);
         when(myUserMapper.fromEntityToDto(myUser1)).thenReturn(myUserDto1);
         when(myUserMapper.fromEntityToDto(myUser2)).thenReturn(myUserDto2);
 
-        Page<MyUserDto> result = myUserServiceImplement.findUsers(paginationRequest);
+        Page<UsersDto> result = myUserServiceImplement.findUsers(paginationRequest);
 
         assertThat(result).isNotNull();
         assertThat(result.getContent()).containsExactly(myUserDto1, myUserDto2);
@@ -104,7 +104,7 @@ public class MyUserServiceTest {
     public void should_find_user_by_id() {
 
         Integer userId = 1;
-        MyUser myUser = MyUser.builder()
+        Users myUser = Users.builder()
                 .id(userId)
                 .firstName("Adel")
                 .lastName("Salem")
@@ -113,7 +113,7 @@ public class MyUserServiceTest {
                 .deleted(false)
                 .build();
 
-        MyUserDto myUserDto = MyUserDto.builder()
+        UsersDto myUserDto = UsersDto.builder()
                 .id(2)
                 .firstName("Ahmed")
                 .lastName("Ali")
@@ -128,7 +128,7 @@ public class MyUserServiceTest {
                 .thenReturn(myUserDto);
 
 
-        MyUserDto find = myUserServiceImplement.getUserById(userId);
+        UsersDto find = myUserServiceImplement.getUserById(userId);
 
         assertThat(find).isNotNull();
         assertThat(find).isEqualTo(myUserDto);
@@ -143,7 +143,7 @@ public class MyUserServiceTest {
     public void should_save_user() {
 
         Integer userId = 1;
-        MyUser myUser = MyUser.builder()
+        Users myUser = Users.builder()
                 .id(userId)
                 .firstName("Adel")
                 .lastName("Salem")
@@ -152,7 +152,7 @@ public class MyUserServiceTest {
                 .deleted(false)
                 .build();
 
-        MyUserDto myUserDto = MyUserDto.builder()
+        UsersDto myUserDto = UsersDto.builder()
                 .id(2)
                 .firstName("Ahmed")
                 .lastName("Ali")
@@ -166,7 +166,7 @@ public class MyUserServiceTest {
         when(myUserRepository.save(myUser)).thenReturn(myUser);
         when(myUserMapper.fromEntityToDto(myUser)).thenReturn(myUserDto);
 
-        MyUserDto savedUser = myUserServiceImplement.createUser(myUserDto);
+        UsersDto savedUser = myUserServiceImplement.createUser(myUserDto);
 
         assertThat(savedUser).isNotNull();
         assertThat(savedUser.getFirstName()).isEqualTo(myUserDto.getFirstName());
@@ -181,7 +181,7 @@ public class MyUserServiceTest {
 
         Integer userId = 1;
 
-        MyUser myUser = MyUser.builder()
+        Users myUser = Users.builder()
                 .id(userId)
                 .firstName("Adel")
                 .lastName("Salem")
@@ -190,7 +190,7 @@ public class MyUserServiceTest {
                 .deleted(false)
                 .build();
 
-        MyUserDto myUserDto = MyUserDto.builder()
+        UsersDto myUserDto = UsersDto.builder()
                 .id(userId)
                 .firstName("Update Ahmed")
                 .lastName("Update Ali")
@@ -199,7 +199,7 @@ public class MyUserServiceTest {
                 .deleted(false)
                 .build();
 
-        MyUser updatedUser = MyUser.builder()
+        Users updatedUser = Users.builder()
                 .id(userId)
                 .firstName("Update Ahmed")
                 .lastName("Update Ali")
@@ -208,7 +208,7 @@ public class MyUserServiceTest {
                 .deleted(false)
                 .build();
 
-        MyUserDto updatedUserDto = MyUserDto.builder()
+        UsersDto updatedUserDto = UsersDto.builder()
                 .id(userId)
                 .firstName("Update Ahmed")
                 .lastName("Update Ali")
@@ -222,7 +222,7 @@ public class MyUserServiceTest {
         when(myUserRepository.save(updatedUser)).thenReturn(updatedUser);
         when(myUserMapper.fromEntityToDto(updatedUser)).thenReturn(updatedUserDto);
 
-        MyUserDto result = myUserServiceImplement.updateUser(userId, myUserDto);
+        UsersDto result = myUserServiceImplement.updateUser(userId, myUserDto);
 
         assertThat(result).isNotNull();
         assertThat(result.getFirstName()).isEqualTo(updatedUserDto.getFirstName());
@@ -239,7 +239,7 @@ public class MyUserServiceTest {
 
         Integer userId = 1;
 
-        MyUser myUser = MyUser.builder()
+        Users myUser = Users.builder()
                 .id(userId)
                 .firstName("Adel")
                 .lastName("Salem")
@@ -263,10 +263,10 @@ public class MyUserServiceTest {
     void should_search_users() {
 
         PaginationRequest paginationRequest = new PaginationRequest();
-        MyUserSearchCriteria searchCriteria = new MyUserSearchCriteria();
+        UsersSearchCriteria searchCriteria = new UsersSearchCriteria();
         Pageable pageable = PageRequest.of(paginationRequest.getPageNumber(), paginationRequest.getPageSize());
 
-        MyUser user1 = MyUser.builder()
+        Users user1 = Users.builder()
                 .id(1)
                 .firstName("Adel")
                 .lastName("Salem")
@@ -275,7 +275,7 @@ public class MyUserServiceTest {
                 .deleted(false)
                 .build();
 
-        MyUser user2 = MyUser.builder()
+        Users user2 = Users.builder()
                 .id(2)
                 .firstName("omar")
                 .lastName("ali")
@@ -284,15 +284,15 @@ public class MyUserServiceTest {
                 .deleted(false)
                 .build();
 
-        List<MyUser> userList = Arrays.asList(user1, user2);
-        Page<MyUser> userPage = new PageImpl<>(userList, pageable, userList.size());
+        List<Users> userList = Arrays.asList(user1, user2);
+        Page<Users> userPage = new PageImpl<>(userList, pageable, userList.size());
 
-        MyUserDto userDto1 = new MyUserDto();
+        UsersDto userDto1 = new UsersDto();
         userDto1.setId(1);
         userDto1.setFirstName("adel");
         userDto1.setLastName("salem");
 
-        MyUserDto userDto2 = new MyUserDto();
+        UsersDto userDto2 = new UsersDto();
         userDto2.setId(2);
         userDto2.setFirstName("omar");
         userDto2.setLastName("ali");
@@ -301,7 +301,7 @@ public class MyUserServiceTest {
         when(myUserMapper.fromEntityToDto(user1)).thenReturn(userDto1);
         when(myUserMapper.fromEntityToDto(user2)).thenReturn(userDto2);
 
-        Page<MyUserDto> result = myUserServiceImplement.searchUsers(paginationRequest, searchCriteria);
+        Page<UsersDto> result = myUserServiceImplement.searchUsers(paginationRequest, searchCriteria);
 
         assertThat(result.getContent()).containsExactly(userDto1, userDto2);
         assertThat(result.getTotalElements()).isEqualTo(userList.size());

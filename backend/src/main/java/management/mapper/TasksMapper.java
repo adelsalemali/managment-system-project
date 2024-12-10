@@ -18,7 +18,6 @@ public class TasksMapper {
 		tasksDto.setDueDate(task.getDueDate());
 		tasksDto.setStatus(task.getStatus());
 		tasksDto.setProjectId(task.getProject().getId());
-//		tasksDto.setDeleted(task.isDeleted());
 
 		return tasksDto; 
 	}
@@ -31,7 +30,6 @@ public class TasksMapper {
 		task.setDescription(tasksDto.getDescription());
 		task.setDueDate(tasksDto.getDueDate());
 		task.setStatus(tasksDto.getStatus());
-//		task.setDeleted(tasksDto.isDeleted());
 
 		return task;
 	}

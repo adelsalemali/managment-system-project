@@ -22,7 +22,8 @@ import org.hibernate.annotations.Where;
 public class Project {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "project_seq")
+	@SequenceGenerator(name = "project_seq", sequenceName = "project_sequence", allocationSize = 1)
 	@Column(name = "project_id")
 	private Integer id ;
 	@Column(name = "name")
@@ -43,5 +44,5 @@ public class Project {
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	private MyUser user;
+	private Users user;
 }

@@ -14,13 +14,14 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-@SQLDelete (sql = "UPDATE user SET deleted = true WHERE user_id =?")
+@SQLDelete (sql = "UPDATE users SET deleted = true WHERE user_id =?")
 @Where (clause = "deleted=false")
-@Table(name = "user")
-public class MyUser {
+@Table(name = "users")
+public class Users {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
+    @SequenceGenerator(name = "user_seq", sequenceName = "user_sequence", allocationSize = 1)
     @Column(name = "user_id")
     private Integer id;
     @Column(name = "user_name")

@@ -1,5 +1,5 @@
 package management.repository.criteria;
-import management.criteria.MyUserSearchCriteria;
+import management.criteria.UsersSearchCriteria;
 import management.criteria.PaginationRequest;
 import management.model.*;
 import org.springframework.data.domain.*;
@@ -11,14 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 @Repository
-public class MyUserCriteriaRepository extends BaseCriteriaRepository<MyUser> {
-    public MyUserCriteriaRepository(EntityManager entityManager) {
+public class UsersCriteriaRepository extends BaseCriteriaRepository<Users> {
+    public UsersCriteriaRepository(EntityManager entityManager) {
         super(entityManager);
     }
 
-    public Page<MyUser> findAllWithFilters(PaginationRequest paginationRequest, MyUserSearchCriteria criteria) {
+    public Page<Users> findAllWithFilters(PaginationRequest paginationRequest, UsersSearchCriteria criteria) {
 
-        return super.findAllWithFilters(MyUser.class, paginationRequest, root -> {
+        return super.findAllWithFilters(Users.class, paginationRequest, root -> {
 
             List<Predicate> predicates = new ArrayList<>();
             if (Objects.nonNull(criteria.getUserName())) {

@@ -1,10 +1,8 @@
 package management.criteria;
 
 import lombok.Data;
-
-import java.time.LocalDate;
 @Data
-public class MyUserSearchCriteria {
+public class UsersSearchCriteria {
 
     private String userName;
     private String firstName;

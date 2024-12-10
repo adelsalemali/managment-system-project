@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MyUserDto {
+public class UsersDto {
 
     private Integer id;
     @NotBlank (message = "User name shouldn't be null and empty")

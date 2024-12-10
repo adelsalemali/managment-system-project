@@ -1,13 +1,13 @@
 package management.mapper;
-import management.dto.MyUserDto;
-import management.model.MyUser;
+import management.dto.UsersDto;
+import management.model.Users;
 import org.springframework.stereotype.Component;
 @Component
-public class MyUserMapper {
+public class UsersMapper {
 
-    public MyUserDto fromEntityToDto(MyUser myUser) { // toDto
+    public UsersDto fromEntityToDto(Users myUser) { // toDto
 
-        MyUserDto myUserDto = new MyUserDto();
+        UsersDto myUserDto = new UsersDto();
         myUserDto.setId(myUser.getId());
         myUserDto.setUserName(myUser.getUserName());
         myUserDto.setFirstName(myUser.getFirstName());
@@ -18,9 +18,9 @@ public class MyUserMapper {
         return myUserDto;
     }
 
-    public MyUser fromDtoToEntity(MyUserDto myUserDto) { // fromDto
+    public Users fromDtoToEntity(UsersDto myUserDto) { // fromDto
 
-        MyUser myUser = new MyUser();
+        Users myUser = new Users();
         myUser.setId(myUserDto.getId());
         myUser.setUserName(myUserDto.getUserName());
         myUser.setFirstName(myUserDto.getFirstName());

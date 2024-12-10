@@ -11,11 +11,11 @@ import java.util.*;
 
 import management.dto.ProjectDto;
 import management.mapper.ProjectMapper;
-import management.model.MyUser;
+import management.model.Users;
 import management.criteria.PaginationRequest;
 import management.model.Project;
 import management.criteria.ProjectSearchCriteria;
-import management.repository.MyUserRepository;
+import management.repository.UsersRepository;
 import management.repository.criteria.ProjectCriteriaRepository;
 import management.repository.ProjectRepository;
 import management.service.implementation.ProjectServiceImplement;
@@ -32,7 +32,7 @@ class ProjectServiceTest {
 	private ProjectRepository projectRepository;
 
 	@Mock
-	private MyUserRepository myUserRepository;
+	private UsersRepository myUserRepository;
 	@Mock
 	private ProjectCriteriaRepository projectCriteriaRepository;
 
@@ -181,7 +181,7 @@ class ProjectServiceTest {
 				.userId(userId)
 				.build();
 
-		MyUser myUser = MyUser.builder()
+		Users myUser = Users.builder()
 				.id(userId)
 				.firstName("John Doe")
 				.build();

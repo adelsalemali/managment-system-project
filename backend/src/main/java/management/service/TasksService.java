@@ -16,6 +16,6 @@ public interface TasksService {
 	void deleteTask(TaskDto tasksDto);
 
 	public Page<TaskDto> searchTasks(PaginationRequest paginationRequest,
-									 TaskSearchCriteria taskSearchCriteria,
-									 Integer projectId);
+					 TaskSearchCriteria taskSearchCriteria,
+					 Integer projectId);
 }
